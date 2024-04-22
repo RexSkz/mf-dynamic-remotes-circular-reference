@@ -6,7 +6,6 @@ const getRemote = (name, url) => (resolve => {
   const script = document.createElement('script');
   script.src = '__URL__';
   script.onload = () => {
-    debugger;
     resolve({
       get: (request) => window['__NAME__'].get(request),
       init: (arg) => {
@@ -30,6 +29,11 @@ module.exports = {
     library: { type: 'var', name: 'main_app' },
   },
   devtool: 'cheap-source-map',
+  optimization: {
+    runtimeChunk: {
+      name: 'runtime',
+    },
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'main_app',
@@ -39,7 +43,7 @@ module.exports = {
       },
       remotes: {
         'sub_app': `promise new Promise(${getRemote('sub_app', 'http://localhost:3001/remote-entry.js')})`,
-        'sub_app_sync': `promise new Promise(${getRemote('sub_app_sync', 'http://localhost:3002/remote-entry.js')})`,
+        // 'sub_app': 'sub_app@http://localhost:3001/remote-entry.js',
       },
     }),
     new HtmlWebpackPlugin(),
