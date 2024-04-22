@@ -1,0 +1,12 @@
+{
+  "name": "mf-dynamic-remotes-circular-reference",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pnpm --filter * start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
